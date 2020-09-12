@@ -14,4 +14,9 @@ spotifyController.addSpotifyController = function( req, res, req_body_spotify ){
     spotifyModel.addSpotifyModel( req, res, req_body_spotify);
 }
 
+spotifyController.deleteSpotifyController = function( req, res, spotify_id ){
+    console.log("en spotify controller del delete")
+    spotifyModel.deleteSpotifyModel( req, res, spotify_id);
+}
+
 module.exports = spotifyController;
