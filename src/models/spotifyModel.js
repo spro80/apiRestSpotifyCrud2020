@@ -91,4 +91,27 @@ spotifyModel.addSpotifyModel = async function(req, res, req_body_spotify ){
     }
 }
 
+spotifyModel.deleteSpotifyModel = async function(req, res, spotify_id ){
+    
+    let client = new Client({
+        user: environment.development.DATABASE.user,
+        password: environment.development.DATABASE.password,
+        database: environment.development.DATABASE.database,
+        port: environment.development.DATABASE.port,
+        host: environment.development.DATABASE.host,
+        ssl: { rejectUnauthorized: false }
+    });
+    client.connect();
+    let query = "delete from results where id=('"+spotify_id+"')";
+    await client.query(query, (error, responseQuery) => {
+        if( error ){
+            console.error('Error: '+error);
+        }else{
+            console.log( responseQuery );
+            middlewareResponse.generateResponseDelete(req, res, responseQuery);
+        }
+        client.end()
+    });
+}
+
 module.exports = spotifyModel;
