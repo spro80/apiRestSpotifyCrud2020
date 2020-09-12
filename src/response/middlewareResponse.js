@@ -40,6 +40,22 @@ middlewareResponse.generateResponsePost = function(req, res, responseQuery){
     });
 }
 
+middlewareResponse.generateResponseDelete = function(req, res, responseQuery){
+    let data = {};
+    if( responseQuery.rowCount ){
+        data = {
+            message: 'OK'
+        }
+    }
+
+    res.setHeader("Content-Type", "application/json; charset=utf-8");
+    res.json({ 
+        "status_code": 204,
+        "headers": req.headers,
+        "body": data
+    });
+}
+
 middlewareResponse.generateResponseError = function(req, res, dataError){
     res.setHeader("Content-Type", "application/json; charset=utf-8");
     res.json({ 
